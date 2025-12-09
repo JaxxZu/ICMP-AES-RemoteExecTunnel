@@ -76,12 +76,12 @@ chmod +x bombardier-linux-amd64
 sudo mv bombardier-linux-amd64 /usr/local/bin/bombardier
 ```  
 
-上傳受控程式並編譯
+上傳受控程式並編譯：
 ```bash
 gcc rj.c -lcrypto -lssl -o rj
 ```  
 
-使用screen保持運行
+使用screen保持運行：
 ```bash
 screen -S xxx
 screen -r xxx
