@@ -62,4 +62,28 @@ Nginx 1.24.0
 MariaDB 10.11.10  
 PHP 8.3
 
+## 被控端部署
+安裝套件：  
+```bash
+apt update -y
+apt install gcc  screen  openssl libssl-dev -y
+```  
+
+安裝bombardier：  
+```bash
+wget https://github.com/codesenberg/bombardier/releases/latest/download/bombardier-linux-amd64
+chmod +x bombardier-linux-amd64
+sudo mv bombardier-linux-amd64 /usr/local/bin/bombardier
+```  
+
+上傳受控程式並編譯
+```bash
+gcc rj.c -lcrypto -lssl -o rj
+```  
+
+使用screen保持運行
+```bash
+screen -S xxx
+screen -r xxx
+```  
 
