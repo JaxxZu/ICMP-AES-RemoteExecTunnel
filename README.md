@@ -9,7 +9,7 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 > 
 > Any misuse is the sole responsibility of the user. The author assumes no liability for damages, misuse, or legal consequences arising from the use of this software.
 
-## 系統組成文件
+## 系統組成檔案
 ### `rj.c`
 被控端（肉雞） 的核心原始碼，在被控端電腦上編譯並運行  
 監聽來自主控端的 ICMP 加密封包  
@@ -51,5 +51,15 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 ### `panel_login.php`
 提供管理員認證介面，防止未授權人員存取Web Panel    
 
+## 配置檔案 
+修改`keep_alive.php`、`panel_attack.php`中的`/www/wwwroot/rjpanel.qooqle.date`路徑為實際路徑   
+修改`panel_login.php`中的管理員密碼  
+修改`sql_connect.php`到真實資料庫帳密  
+
+## 主控端環境
+Debian 11  
+Nginx 1.24.0  
+MariaDB 10.11.10  
+PHP 8.3
 
 
