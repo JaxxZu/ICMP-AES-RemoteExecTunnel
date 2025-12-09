@@ -53,8 +53,8 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 
 ## 配置檔案 
 修改`keep_alive.php`、`panel_attack.php`中的`/www/wwwroot/rjpanel.qooqle.date`路徑為實際路徑   
-修改`panel_login.php`中的管理員密碼  
-修改`sql_connect.php`到真實資料庫帳密  
+修改`panel_login.php`中的管理員密碼、Cloudflare Turnstile Secret Key  
+修改`sql_connect.php`到真實資料庫帳密
 
 ## 主控端環境
 Debian 11  
