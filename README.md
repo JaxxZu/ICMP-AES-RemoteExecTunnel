@@ -1,4 +1,4 @@
-<img width="160" height="81" alt="image" src="https://github.com/user-attachments/assets/0e8c648d-8202-47a0-a627-24534ad31388" /># ICMP-AES-RemoteExecTunnel
+# ICMP-AES-RemoteExecTunnel
 A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Control Research  
 基於 AES 加密 ICMP 隧道的遠端指令執行與節點管理研究框架
 
