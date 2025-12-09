@@ -26,16 +26,15 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 
 
 ### `panel_attack.php`
-群控指令發送介面(接口)
-管理員在將需要執行的指令POST方式傳送給本頁面，本腳本會調用 icmp_function.php 將指令加密並封裝成 ICMP 封包發送給指定的被控端
-而後，接收並顯示被控端回傳的回應
+群控指令發送介面(接口)  
+管理員在將需要執行的指令POST方式傳送給本頁面，本腳本會調用 icmp_function.php 將指令加密並封裝成 ICMP 封包發送給指定的被控端  
+而後，接收並顯示被控端回傳的回應  
 
 ### `panel_addrj.php`
-新增新的被控端資料加入資料庫進行管理
+新增新的被控端資料加入資料庫進行管理  
 
 ### `panel_delrj.php`
-
-從資料庫中移除被控端
+從資料庫中移除被控端  
 
 ### `panel_download_rj.c.php`
 動態生成被控端代碼
@@ -43,27 +42,14 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 使用者下載後無需手動修改程式碼即可直接編譯使用  
 
 ### `keep_alive.php`
-
-
-
-用途：心跳維持/狀態檢查。
-
-功能：可能用於定期 Ping 受害者列表中的 IP，以確認它們是否仍然在線（Alive），並更新資料庫中的狀態。
-
-
-
-### `test_client.php`
-
-
-
-用途：測試用客戶端。
-
-功能：這是一個用 PHP 寫的模擬客戶端。開發者在不編譯 C 代碼 (rj.c) 的情況下，可以用這個腳本來測試伺服器端的 icmp_function.php 邏輯是否正常（例如測試加密解密是否匹配）。
+心跳檢查  
+配合 Crontab 計劃任務，定期確認受控端是否仍然在線，並更新資料庫中的最後在線時間
 
 ### `sql_connect.php`
-存放 MySQL 資料庫的主機、使用者名稱、密碼和資料庫名稱配置
+存放 MySQL 資料庫的主機、使用者名稱、密碼和資料庫名稱配置  
+
 ### `panel_login.php`
-提供管理員認證介面，防止未授權人員存取Web Panel  
+提供管理員認證介面，防止未授權人員存取Web Panel    
 
 
 
