@@ -85,5 +85,17 @@ gcc rj.c -lcrypto -lssl -o rj
 ```bash
 screen -S xxx
 screen -r xxx
-```  
+```
+
+資料庫：
+```sql
+CREATE TABLE `botnet` (
+  `ip` binary(4) NOT NULL,
+  `aes_key` binary(32) NOT NULL,
+  `last_alive_time` timestamp NOT NULL,
+  `is_deleted` tinyint(1) NOT NULL,
+  PRIMARY KEY (`ip`),
+  UNIQUE KEY `ip` (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci
+```
 
