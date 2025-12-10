@@ -54,7 +54,7 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 ## 主控端環境
 Debian 11  
 Nginx 1.24.0  
-MariaDB 10.11.10  
+MariaDB 10.3 
 PHP 8.3
 
 ## 主控端配置
