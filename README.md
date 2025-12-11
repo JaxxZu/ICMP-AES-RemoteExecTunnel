@@ -51,16 +51,31 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 ### `panel_login.php`
 提供管理員認證介面，防止未授權人員存取Web Panel    
 
-## 配置檔案 
+## 主控端環境
+Debian 11  
+Nginx 1.24.0  
+MariaDB 10.3 
+PHP 8.3
+
+## 主控端配置
+
 修改`keep_alive.php`、`panel_attack.php`中的`/www/wwwroot/rjpanel.qooqle.date`路徑為實際路徑   
 修改`panel_login.php`中的管理員密碼、Cloudflare Turnstile Secret Key  
 修改`sql_connect.php`到真實資料庫帳密
 
-## 主控端環境
-Debian 11  
-Nginx 1.24.0  
-MariaDB 10.11.10  
-PHP 8.3
+資料庫：
+```sql
+CREATE TABLE `botnet` (
+ `ip` binary(4) NOT NULL,
+ `aes_key` binary(32) NOT NULL,
+ `last_alive_time` timestamp NULL DEFAULT NULL,
+ `is_deleted` tinyint(1) NOT NULL,
+ PRIMARY KEY (`ip`),
+ UNIQUE KEY `ip` (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+```
+
+
 
 ## 被控端部署
 安裝套件：  
@@ -85,5 +100,4 @@ gcc rj.c -lcrypto -lssl -o rj
 ```bash
 screen -S xxx
 screen -r xxx
-```  
-
+```
