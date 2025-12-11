@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Taipei");
 
 
 
@@ -8,7 +9,7 @@
 
 $host = "localhost";
 $user = "kongzi";
-$pass = "cNDnbbBfZHz2mMT2";
+$pass = "PW";
 $db   = "kongzi";
 
 $conn = mysqli_connect($host, $user, $pass, $db);

