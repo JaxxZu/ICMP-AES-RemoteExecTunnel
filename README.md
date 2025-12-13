@@ -21,7 +21,7 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 提供Web Panel調用  
 
 ### `panel.php` 
-主控制台  
+Web Panel 主控制台  
 顯示目前已上線的肉雞列表、狀態，下發群控指令等  
 
 
