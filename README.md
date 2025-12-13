@@ -102,3 +102,7 @@ gcc rj.c -lcrypto -lssl -o rj
 screen -S xxx
 screen -r xxx
 ```
+
+
+## 研究報告
+[下載](./essay_for_public.pdf)
