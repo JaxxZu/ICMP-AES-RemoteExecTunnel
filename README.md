@@ -104,5 +104,5 @@ screen -r xxx
 ```
 
 
-## 研究報告
+## 結課論文
 [下載](./essay_for_public.pdf)
