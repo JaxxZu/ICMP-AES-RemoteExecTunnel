@@ -9,7 +9,10 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 > 
 > Any misuse is the sole responsibility of the user. The author assumes no liability for damages, misuse, or legal consequences arising from the use of this software.
 
-## 系統組成檔案
+## 系統結構
+<img width="100%" src="https://github.com/user-attachments/assets/1b678210-4db2-494d-be56-126224bb4ae8" />
+
+
 ### `rj.c`
 被控端（肉雞） 的核心原始碼，在被控端電腦上編譯並運行  
 監聽來自主控端的 ICMP 加密封包  
