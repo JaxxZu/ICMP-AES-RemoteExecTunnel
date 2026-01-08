@@ -8,52 +8,29 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 > Do NOT use this tool on systems, networks or services without explicit authorization.
 > 
 > Any misuse is the sole responsibility of the user. The author assumes no liability for damages, misuse, or legal consequences arising from the use of this software.
+## 特性
+
+- AES 對稱加密保障 ICMP 封包傳輸安全
+- 支援遠端指令執行
+- PHP Web 控制面板，方便管理上線節點
+- 心跳機制，實時追蹤節點在線狀態
+- 動態生成被控端程式碼，自動注入自訂 AES Key
 
 ## 系統結構
 <img width="100%" src="https://github.com/user-attachments/assets/1b678210-4db2-494d-be56-126224bb4ae8" />
 
-
-### `rj.c`
-被控端（肉雞） 的核心原始碼，在被控端電腦上編譯並運行  
-監聽來自主控端的 ICMP 加密封包  
-使用 AES 演算法解密封包內容，提取指令並執行  
-使用ICMP 加密封包回應給主控端  
-
-### `icmp_function.php`
-封裝 ICMP 封包，包括建立 Raw Socket、建構 ICMP 標頭、計算校驗和（Checksum）的程式碼  
-提供Web Panel調用  
-
-### `panel.php` 
-Web Panel 主控制台  
-顯示目前已上線的肉雞列表、狀態，下發群控指令等  
-
-
-### `panel_attack.php`
-群控指令發送介面  
-管理員在將需要執行的指令POST方式傳送給本頁面，本腳本會調用 icmp_function.php 將指令加密並封裝成 ICMP 封包發送給指定的被控端  
-而後，接收並顯示被控端回傳的回應  
-
-### `panel_addrj.php`
-新增新的被控端資料加入資料庫進行管理  
-
-### `panel_delrj.php`
-從資料庫中移除被控端  
-
-### `panel_download_rj.c.php`
-動態生成被控端代碼
-先讀取 rj.c 的內容，將其中的 AES KEY 變量自動替換成當前控制端的AES KEY，然後讓使用者下載   
-使用者下載後無需手動修改程式碼即可直接編譯使用  
-
-### `keep_alive.php`
-心跳檢查  
-配合 Crontab 計劃任務，定期確認受控端是否仍然在線，並更新資料庫中的最後在線時間
-
-### `sql_connect.php`
-存放 MySQL 資料庫的主機、使用者名稱、密碼和資料庫名稱配置  
-
-### `panel_login.php`
-提供管理員認證介面，防止未授權人員存取Web Panel    
-
+| 檔案名稱                  | 功能說明                                                                 |
+|---------------------------|--------------------------------------------------------------------------|
+| `rj.c`                    | 被控端核心程式（C語言），監聽加密 ICMP 封包、解密執行指令並回應          |
+| `icmp_function.php`       | 封裝 ICMP 封包建構、Raw Socket 操作及校驗和計算                          |
+| `panel.php`               | 主控制面板，顯示上線節點並下發指令                                       |
+| `panel_attack.php`        | 群控指令發送介面，負責加密並透過 ICMP 發送指令                           |
+| `panel_addrj.php`         | 新增被控端至資料庫                                                       |
+| `panel_delrj.php`         | 從資料庫移除被控端                                                       |
+| `panel_download_rj.c.php` | 動態生成並替換 AES Key 的被控端程式碼，供下載                            |
+| `keep_alive.php`          | 心跳檢查腳本（需配合 Crontab 定時執行）                                  |
+| `panel_login.php`         | 管理員登入驗證介面（支援 Cloudflare Turnstile 驗證碼）                   |
+| `sql_connect.php`         | 資料庫連線配置                                                           |
 ## 主控端環境
 Debian 11  
 Nginx 1.24.0  
@@ -105,7 +82,8 @@ gcc rj.c -lcrypto -lssl -o rj
 screen -S xxx
 screen -r xxx
 ```
-
+## 注意事項與
+主控端與被控端均需 root 權限才能操作 Raw Socket
 
 ## 結課論文
 [下載](./essay_for_public.pdf)
