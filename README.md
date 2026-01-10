@@ -39,12 +39,12 @@ PHP 8.3
 
 ## 主控端配置
 
-修改`keep_alive.php`、`panel_attack.php`中的`/www/wwwroot/rjpanel.qooqle.date`路徑為實際路徑   
-修改`panel_login.php`中的管理員密碼、Cloudflare Turnstile Secret Key (不需要驗證碼的話可以修改`if (!$resultData['success'])`判斷 
+1. 修改`keep_alive.php`、`panel_attack.php`中的`/www/wwwroot/rjpanel.qooqle.date`路徑為實際路徑   
+2. 修改`panel_login.php`中的管理員密碼、Cloudflare Turnstile Secret Key (不需要驗證碼的話可以修改`if (!$resultData['success'])`判斷 
 )  
-修改`sql_connect.php`到真實資料庫帳密
+3. 修改`sql_connect.php`到真實資料庫帳密
 
-資料庫：
+### 資料庫：
 ```sql
 CREATE TABLE `botnet` (
  `ip` binary(4) NOT NULL,
