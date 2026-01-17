@@ -72,16 +72,17 @@ chmod +x bombardier-linux-amd64
 sudo mv bombardier-linux-amd64 /usr/local/bin/bombardier
 ```  
 
-上傳受控程式並編譯：
-```bash
-gcc rj.c -lcrypto -lssl -o rj
-```  
-
 使用screen保持運行：
 ```bash
 screen -S xxx
 screen -r xxx
 ```
+
+上傳受控程式並編譯：
+```bash
+gcc rj.c -lcrypto -lssl -o rj
+```  
+
 ## 注意事項與
 主控端與被控端均需 root 權限才能操作 Raw Socket
 
