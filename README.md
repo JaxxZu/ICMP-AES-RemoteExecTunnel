@@ -7,7 +7,7 @@ A Secure AES-Encrypted ICMP Tunnel for Remote Command Execution and Botnet Contr
 > 
 > Do NOT use this tool on systems, networks or services without explicit authorization.
 > 
-> Any misuse is the sole responsibility of the user. The author assumes no liability for damages, misuse, or legal consequences arising from the use of this software.
+> Any misuse is the sole responsibility of the user. The author assumes no liability for damages, misuse or legal consequences arising from the use of this software.
 ## 特性
 
 - AES 對稱加密保障 ICMP 封包傳輸安全
