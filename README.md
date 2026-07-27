@@ -86,5 +86,8 @@ gcc rj.c -lcrypto -lssl -o rj
 ## 注意事項
 主控端與被控端均需 root 權限才能操作 Raw Socket
 
+## 報告投影片
+[下載](./slide_for_pubilc.pdf)  
+
 ## 結課論文
 [下載](./essay_for_public.pdf)
